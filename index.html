@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name=description content="Fortunate: a fortune clone">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://fortunate.io">
+<title>Fortunate: a fortune(1) clone</title>
+<link rel="manifest" href="manifest.json">
+<!-- TODO: Open Graph, Twitter, Apple Web App stuff, icons -->
+<!-- We inline style to reduce the critical rendering path --> 
+<style>
+</style>
+</head>
+<body>
+
+<div id=fortune_finders>
+    <!-- TODO: dynamically generate these files -->
+  <select id=fortune_file>
+    <option value="simple">Simple</option>
+  </select>
+  <!-- TODO: add a fortune file -->
+</div>
+<div id="fortune">
+  <!-- this is where the fortune goes -->
+  <noscript>Sorry, you need JS :\</noscript>
+</div>
+<script src="fortunate.js"></script>
+<!-- Install the SW -->
+<script>
+if ('serviceWorker' in navigator) { 
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }) ;
+}
+</script>
+
+<!-- Google Analytics tag -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71060232-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
