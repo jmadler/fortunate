@@ -7,7 +7,7 @@ self.addEventListener('install', function(event) {
   var app_shell = [
     'index.html',
     'fortunate.js',
-    'fortunes/basic.txt'
+    '../fortunes/douglas-adams.fortune'
   ];
 
   event.waitUntil(

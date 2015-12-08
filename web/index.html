@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name=description content="Fortunate: a fortune clone">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="canonical" href="https://fortunate.io">
+<title>Fortunate: a fortune(1) clone</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-deep_purple.min.css">
+<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+<!-- TODO: Open Graph, Twitter, Apple Web App stuff, icons -->
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Fortunate</span>
+      <!-- Spacer for right alignment --> 
+      <div class="mdl-layout-spacer"></div>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <!-- Title -->
+    <span class="mdl-layout-title">Fortunate</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="#douglas-adams" id="default-fortune">Douglas Adams</a>
+      <!-- TODO: dynamically generate these files server-side -->
+    </nav>
+  </div>
+  <main class="mdl-layout__content" id="content" style="margin: 0 auto; padding-top: 5%;">
+    <div class="page-content">
+      <div id="fortune">
+         Tap me! :D
+         <!-- TODO: dynamically generate these files server-side -->
+         <!-- this is where the fortune goes -->
+         <noscript>Sorry, you need JS :\</noscript>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="fortunate.js"></script>
+
+<!-- Install the SW -->
+<script>
+if ('serviceWorker' in navigator) { 
+  navigator.serviceWorker.register('/sw.js', { scope: '/' }) ;
+}
+</script>
+
+<!-- Google Analytics tag -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71060232-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
