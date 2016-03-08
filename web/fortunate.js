@@ -4,7 +4,11 @@
   // XXX error testng
 
   function shuffle(arr) {
-    for (var i = array.length - 1; i > 0; i--) {
+    if (typeof arr != 'Array' && arr.length >= 0) {
+      console.log('Not sure what this "array" is: ' + arr);
+      return arr;
+    }
+    for (var i = arr.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
       var tmp = arr[i];
       arr[i] = arr[j];

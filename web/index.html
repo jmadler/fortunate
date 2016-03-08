@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-deep_purple.min.css">
 <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
 <!-- TODO: Open Graph, Twitter, Apple Web App stuff, icons -->
+<!-- XXX test offline -->
+<!-- TODO: create icon -->
+<!-- TODO: HTTPS + HSTS + HTTP2 -->
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -26,13 +29,13 @@
     <!-- Title -->
     <span class="mdl-layout-title">Fortunate</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="#douglas-adams" id="default-fortune">Douglas Adams</a>
+      <a class="mdl-navigation__link" href="#douglas-adams" onclick="document.querySelector('mdl-layout').MaterialLayout.toggleDrawer();" id="default-fortune">Douglas Adams</a>
       <!-- TODO: dynamically generate these files server-side -->
     </nav>
   </div>
   <main class="mdl-layout__content" id="content" style="margin: 0 auto; padding-top: 5%;">
     <div class="page-content">
-      <div id="fortune">
+      <div id="fortune" style="width: 85%; margin: 5%">
          Tap me! :D
          <!-- TODO: dynamically generate these files server-side -->
          <!-- this is where the fortune goes -->
@@ -46,7 +49,7 @@
 <!-- Install the SW -->
 <script>
 if ('serviceWorker' in navigator) { 
-  navigator.serviceWorker.register('/sw.js', { scope: '/' }) ;
+  navigator.serviceWorker.register('sw.js') ;
 }
 </script>
 
