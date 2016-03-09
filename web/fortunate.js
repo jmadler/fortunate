@@ -1,10 +1,9 @@
 (function() {
   'use strict';
 
-  // XXX error testng
-
   function shuffle(arr) {
-    if (typeof arr != 'Array' && arr.length >= 0) {
+    // shuffle() is a Fisher-Yates shuffling function -- it takes an array and returns the same array, shuffled.
+    if (typeof arr != 'Array' || arr.length < 1) {
       console.log('Not sure what this "array" is: ' + arr);
       return arr;
     }
@@ -20,8 +19,16 @@
   var FortuneFile = function(fortuneFileId, fortunes) {
     // FortuneFile object
     //   represents a fortune file
-    //   has => fortuneFileId
-    //   has => fortunes (array of fortunes as strings) // XXX should be a linked list so it loops
+    //   has => fortuneFileId (string)
+    //   has => fortunes (array of strings) 
+    if (typeof fortuneFileId != 'String' || fortuneFileId.length < 1) {
+      console.log('Not sure what this fortuneFileId is: ' + fortuneFIleId);
+      return;
+    }
+    if (typeof fortunes != 'Array' || fortunes.length < 1) {
+      console.log('Not sure what this fortunes "array" is: ' + fortunes);
+      return;
+    }
     this.fortuneFileId = fortuneFileId;
     this.fortunes = fortunes;
   }
@@ -35,49 +42,58 @@
           shuffle(self.fortunes);
         });
       } else {
-        console.log('foo');
+        console.log('Our response was not ok :('); // XXX
       }
     });
   }
 
   FortuneFile.prototype.elem = function(position) { 
+    // fortuneFile.elem() returns the element at a given position
     return this.fortunes[position];
   }
   
   var Fortunate = function(fortuneFile) {
     // Fortunate object
     //   the controller
-    //   has => fortuneFiles (array of FortuneFile objects available)
     //   has => currentFortuneFile (the currently loaded FortuneFile object)
-    //   has => position (Number) - location of the next fortune in the list to display
+    //   has => position (integer) - location of the next fortune in the list to display
     this.position = 0;
     this.currentFortuneFile = fortuneFile;
     this.loadFortunes();
   }
 
   Fortunate.prototype.loadFortunes = function() {
+    // fortune.loadFortunes() loads the current fortuneFile's contents into memory
     var self = this;
     this.currentFortuneFile.loadFortunes().then( function () {
+      // Reset the position of the current fortune file
       self.position = 0;
     });
   }
 
   Fortunate.prototype.switchFortuneFile = function (fortuneFile) {
+    // fortune.switchFortuneFile() takes a fortuneFile and switches to it
     this.currentFortuneFile = fortuneFile;
     this.loadFortunes();
   }
 
   Fortunate.prototype.nextFortune = function () {
+    // fortune.nextFortune() returns the next fortune in the current fortune file
     this.position++;
     if (this.position >= this.currentFortuneFile.fortunes.length) {
+      // if we've hit the end of the fortune file, let's wrap back to the beginning
       this.position = 0;
     }
     return this.currentFortuneFile.elem(this.position);
   }
 
   function hashToFortune (hash) {
+    // hashToFortune(hash) is a utility function that, when given a location.hash value, returns the corresponding fortune file's path
+    if (typeof hash != 'String' || hash.length < 1) {
+      console.log('Not sure what this location.hash is: ' + hash);
+      return;
+    }
     var fortune = hash.replace(/^[^#]+?#/, '');
-    console.log(fortune);
     return '../fortunes/' + fortune + '.fortune';
   }
 
@@ -88,13 +104,12 @@
     var fortunate = new Fortunate(new FortuneFile(hashToFortune(document.getElementById('default-fortune').href)));
 
     document.getElementById('content').addEventListener('click', function() {
-      // when body is clicked, replace it with a random Fortune  
+      // when the is clicked, replace it with a random Fortune  
       fortuneElement.innerHTML = fortunate.nextFortune();
     });
 
     window.addEventListener('onhashchange', function() { 
       // switch fortune files
-      console.log('hash change');
       fortunate.switchFortuneFile(new FortuneFile(hashToFortune(location.hash)));
     });
 

@@ -8,16 +8,24 @@
 <title>Fortunate: a fortune(1) clone</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-deep_purple.min.css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.blue-purple.min.css">
 <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-<!-- TODO: Open Graph, Twitter, Apple Web App stuff, icons -->
-<!-- XXX test offline -->
-<!-- TODO: create icon -->
-<!-- TODO: HTTPS + HSTS + HTTP2 -->
+<script type="text/javascript">
+var color = document.getElementById('header').style.backgroundColor;
+function toggleOnline () {
+  if (document.getElementById('header').style.backgroundColor == color) {
+    document.getElementById('header').style.backgroundColor = 'grey';
+  } else {
+    document.getElementById('header').style.backgroundColor = color;
+  }
+}
+window.addEventListener("offline", toggleOnline);
+window.addEventListener("online", toggleOnline);
+</script>
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
+  <header class="mdl-layout__header" id="header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title">Fortunate</span>
