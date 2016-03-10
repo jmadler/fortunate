@@ -11,18 +11,6 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.blue_grey-orange.min.css">
 <link rel="icon" href="../icons/launcher-icon-1x.png">
 <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
-<script type="text/javascript">
-var color = document.getElementById('header').style.backgroundColor;
-function toggleOnline () {
-  if (document.getElementById('header').style.backgroundColor == color) {
-    document.getElementById('header').style.backgroundColor = 'grey';
-  } else {
-    document.getElementById('header').style.backgroundColor = color;
-  }
-}
-window.addEventListener("offline", toggleOnline);
-window.addEventListener("online", toggleOnline);
-</script>
 </head>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -72,6 +60,17 @@ if ('serviceWorker' in navigator) {
   ga('create', 'UA-71060232-1', 'auto');
   ga('send', 'pageview');
 </script>
-
+<script type="text/javascript">
+var color = document.getElementById('header').style.backgroundColor;
+function toggleOnline () {
+  if (document.getElementById('header').style.backgroundColor == color) {
+    document.getElementById('header').style.backgroundColor = 'grey';
+  } else {
+    document.getElementById('header').style.backgroundColor = color;
+  }
+}
+window.addEventListener("offline", toggleOnline);
+window.addEventListener("online", toggleOnline);
+</script>
 </body>
 </html>
