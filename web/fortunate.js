@@ -21,7 +21,7 @@
     //   represents a fortune file
     //   has => fortuneFileId (string)
     //   has => fortunes (array of strings) 
-    if (typeof fortuneFileId != 'String' || fortuneFileId.length < 1) {
+    if (typeof fortuneFileId != 'string' || fortuneFileId.length < 1) {
       console.log('Not sure what this fortuneFileId is: ' + fortuneFIleId);
       return;
     }
