@@ -25,10 +25,6 @@
       console.log('Not sure what this fortuneFileId is: ' + fortuneFIleId);
       return;
     }
-    if (typeof fortunes != 'Array' || fortunes.length < 1) {
-      console.log('Not sure what this fortunes "array" is: ' + fortunes);
-      return;
-    }
     this.fortuneFileId = fortuneFileId;
     this.fortunes = fortunes;
   }
