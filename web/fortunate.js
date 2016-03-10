@@ -1,8 +1,12 @@
 (function() {
   'use strict';
 
+  /**
+   * shuffle() is a Fisher-Yates shuffling function -- it takes an array and returns the same array, shuffled.
+   * @param {array} arr - any array
+   * @return {array} - The same array, shuffled
+   */
   function shuffle(arr) {
-    // shuffle() is a Fisher-Yates shuffling function -- it takes an array and returns the same array, shuffled.
     if (!(Array.isArray(arr) && arr.length < 1)) {
       console.log('Not sure what this "array" is: ' + arr);
       return arr;
@@ -16,11 +20,12 @@
     return arr;
   }
 
+  /**
+   * FortuneFile class, representing a fortune file
+   * @param {string} fortuneFileId - the FortuneFile ID (i.e. "douglas-adams" for "../fortunes/douglas-adams.fortune")
+   * @param {array} fortunes - an array of strings that contain the fortunes within that file
+   */
   var FortuneFile = function(fortuneFileId, fortunes) {
-    // FortuneFile object
-    //   represents a fortune file
-    //   has => fortuneFileId (string)
-    //   has => fortunes (array of strings)
     if (typeof fortuneFileId !== 'string' || fortuneFileId.length < 1) {
       console.log('Not sure what this fortuneFileId is: ' + fortuneFileId);
       return;
@@ -29,6 +34,10 @@
     this.fortunes = fortunes;
   };
 
+  /**
+   * FortuneFile.loadFortunes() chunks the fortuneFile's contents into an array of fortunes
+   * @return {promise} - promises promises promises.
+   */
   FortuneFile.prototype.loadFortunes = function() {
     var self = this;
     return fetch(this.fortuneFileId).then(function(response) {
@@ -43,23 +52,31 @@
     });
   };
 
+  /**
+   * FortuneFile.elem() returns the element at a given position
+   * @param {number} position - the position of the element
+   * @return {string} - a string representing the fortune
+   */
   FortuneFile.prototype.elem = function(position) {
-    // fortuneFile.elem() returns the element at a given position
     return this.fortunes[position];
   };
 
+  /**
+   * Fortunate class, the controller
+   * @param {FortuneFile} fortuneFile - the currently loaded FortuneFile object
+   */
   var Fortunate = function(fortuneFile) {
-    // Fortunate object
-    //   the controller
-    //   has => currentFortuneFile (the currently loaded FortuneFile object)
-    //   has => position (integer) - location of the next fortune in the list to display
+    // position (location of the next fortune in the list to display)
     this.position = 0;
+    // currentFortuneFile (the currently loaded FortuneFile object)
     this.currentFortuneFile = fortuneFile;
     this.loadFortunes();
   };
 
+  /**
+   * Fortunate.loadFortunes() loads the current fortuneFile's contents into memory
+   */
   Fortunate.prototype.loadFortunes = function() {
-    // fortune.loadFortunes() loads the current fortuneFile's contents into memory
     var self = this;
     this.currentFortuneFile.loadFortunes().then(function() {
       // Reset the position of the current fortune file
@@ -67,14 +84,20 @@
     });
   };
 
+  /**
+   * Fortunate.switchFortuneFile() takes a fortuneFile and switches to it
+   * @param {FortuneFile} fortuneFile - a FortuneFile object to switch to
+   */
   Fortunate.prototype.switchFortuneFile = function(fortuneFile) {
-    // fortune.switchFortuneFile() takes a fortuneFile and switches to it
     this.currentFortuneFile = fortuneFile;
     this.loadFortunes();
   };
 
+  /**
+   * Fortunate.nextFortune()
+   * @return {string} - the next fortune in the current fortune file
+   */
   Fortunate.prototype.nextFortune = function() {
-    // fortune.nextFortune() returns the next fortune in the current fortune file
     this.position++;
     if (this.position >= this.currentFortuneFile.fortunes.length) {
       // if we've hit the end of the fortune file, let's wrap back to the beginning
@@ -83,8 +106,12 @@
     return this.currentFortuneFile.elem(this.position);
   };
 
+  /**
+   * hashToFortune is a utility function that, when given a location.hash value, returns the corresponding fortune file's path
+   * @param {string} hash - a location.hash string
+   * @return {string} - the corresponding fortune file path
+   */
   function hashToFortune(hash) {
-    // hashToFortune(hash) is a utility function that, when given a location.hash value, returns the corresponding fortune file's path
     if (typeof hash !== 'string' || hash.length < 1) {
       console.log('Not sure what this location.hash is: ' + hash);
       return;
