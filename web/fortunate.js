@@ -89,7 +89,7 @@
 
   function hashToFortune (hash) {
     // hashToFortune(hash) is a utility function that, when given a location.hash value, returns the corresponding fortune file's path
-    if (typeof hash != 'String' || hash.length < 1) {
+    if (typeof hash != 'string' || hash.length < 1) {
       console.log('Not sure what this location.hash is: ' + hash);
       return;
     }
