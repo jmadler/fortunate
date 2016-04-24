@@ -130,8 +130,15 @@
     var fortunate = new Fortunate(new FortuneFile(fortuneFileId));
 
     document.getElementById('content').addEventListener('click', function() {
-      // when the is clicked, replace it with a random Fortune
+      // when the fortune is clicked, replace it with a random Fortune
       fortuneElement.innerHTML = fortunate.nextFortune();
+    });
+
+    document.getElementById('content').addEventListener('keydown', function(event) {
+      // when the fortune is selected and hit with 'space' or 'enter', replace it with a random Fortune
+      if (event.keyCode == 13 || event.keyCode == 32) {
+        fortuneElement.innerHTML = fortunate.nextFortune();
+      }
     });
 
     window.addEventListener('onhashchange', function() {
