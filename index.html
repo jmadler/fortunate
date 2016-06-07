@@ -31,14 +31,15 @@
       <!-- TODO: dynamically generate these files server-side -->
     </nav>
   </div>
-  <main class="mdl-layout__content" id="content" style="margin: 0 auto; padding-top: 5%;">
-    <div class="page-content">
-      <div id="fortune" style="width: 85%; margin: 5%; cursor: pointer" role="button" tabindex="0">
-         Tap me! :D
-         <!-- TODO: dynamically pre-populate this div server-side -->
-         <!-- this is where the fortune goes -->
-         <noscript>Sorry, you need JS :\</noscript>
+  <main class="mdl-layout__content" id="content" style="display: flex; margin: 15%;">
+    <div class="page-content" style="display: flex; align-items: stretch; flex-direction: column; justify-content: space-between;">
+      <div id="fortune" style="" role="button" tabindex="0">
+        Tap me! :D
+        <!-- TODO: dynamically pre-populate this div server-side -->
+        <!-- this is where the fortune goes -->
+        <noscript>Sorry, you need JS :\</noscript>
       </div>
+        <span id="quoted">&mdash; Douglas Adams</span>
     </div>
   </main>
 </div>
